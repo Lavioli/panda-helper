@@ -43,6 +43,14 @@
 2. echo $C9_HOSTNAME
     -checks for hostname link
 
+``Install webpack dev server``
+    `updates server http://localhost:8080/ automatically without refreshing browser`
+1. npm install webpack.dev.server -D 
+    `-D is basically AKA --save-dev`
+2. package.json create a custom script:
+    `"start": "webpack-dev-server --inline --hot"`
+    -inline adds the javascript code inside the --html page, and --hot reloads it
+
 ``Install react, babel, and webpack``
 1. npm install --save-dev mocha chai react-addons-test-utils babel-register
 2. npm install --save react react-dom

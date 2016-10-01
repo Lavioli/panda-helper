@@ -20,11 +20,18 @@
     "mocha": "^3.1.0",
     "react": "^15.3.2",
     "react-addons-test-utils": "^15.3.2",
-    "webpack": "^1.13.2"
+    "webpack": "^1.13.2",
+    "webpack-dev-server": "^1.16.1"
   },
   "scripts": {
-    "test": "mocha test"
-
+    "start": "webpack-dev-server --inline --hot",
+    "test": "mocha --compilers js:babel-register test/**/*.js*"
+  },
+  "babel": {
+    "presets": [
+      "es2015",
+      "react"
+    ]
   },
   "repository": {
     "type": "git",

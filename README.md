@@ -30,8 +30,10 @@
 ``Install Mongoose``
 1. npm install express mongoose body-parser --save
 
-``Install Mocha & Chai``
-1. npm install mocha chai chai-http --save-dev
+``Install Mocha(globally) & Chai``
+1. npm install mocha -g chai chai-http --save-dev
+2. if it doesnt work, you might have to do a sudo install:
+    ` $sudo npm install mocha -g chai chai-http --save-dev`
 
 ``Install passport & bcrypt``
 1. npm install --save express body-parser mongoose passport passport-http bcryptjs
@@ -41,7 +43,72 @@
 2. echo $C9_HOSTNAME
     -checks for hostname link
 
+``Install react, babel, and webpack``
+1. npm install --save-dev mocha chai react-addons-test-utils babel-register
+2. npm install --save react react-dom
+3. npm install --save-dev babel-preset-react
+4. npm install --save-dev webpack
+5. npm install --save-dev babel-core babel-preset-es2015 babel-loader
+6. npm install --save react-router
+6. touch webpack.config.js
+```
+var path = require('path');
 
+    var webpack = require('webpack');
+
+    var packageData = require('./package.json');
+
+    var filename = [packageData.name, packageData.version, 'js'];
+
+    module.exports = {
+        entry: path.resolve(__dirname, packageData.main),
+        output: {
+            path: path.resolve(__dirname, 'build'),
+            filename: filename.join('.'),
+        },
+        devtool: 'source-map',
+        module: {
+            loaders: [
+                {
+                    test: /\.js$/,
+                    exclude: /(node_modules)/,
+                    loader: 'babel',
+                    query: {
+                        presets: ['es2015', 'react']
+                    }
+                }
+            ]
+        }
+    };
+```
+7. inside package.json
+```
+    "scripts": {
+        //helps us set up mocha and looks for file in folder called test
+        "test": "mocha --compilers js:babel-register test/**/*.js*"
+      },
+      "babel": {
+        "presets": ["es2015", "react"]
+      }
+```
+
+``Install Redux``
+1. npm install --save redux
+
+``Install Async Actions``
+1. npm install --save redux-thunk
+2. add this to store.js
+```
+var store = createStore(reducers.repositoryReducer, applyMiddleware(thunk));
+module.exports  = store;
+```
+
+``Install polyfill for HTTP fetch API``
+1. npm install --save isomorphic-fetch
+2. action.js
+```
+require('isomorphic-fetch');
+```
 
 ``REACT CHEATSHEET``
 http://tinyurl.com/reactcheatsheet
@@ -82,4 +149,13 @@ $ heroku ps:scale web=1
 Scaling web processes... done, now running 1
 `open`
 $ heroku open
+
+``Create new repo from bash using github api``
+1. curl -u 'INSERT GITHUB USERNAME HERE' https://api.github.com/user/repos -d '{"name":"INSERT REPO NAME HERE","description":"INSERT OPTIONAL DESCRIPTION HERE"}'
+    -Example
+    curl -u 'Lavioli' https://api.github.com/user/repos -d '{"name":"panda-helper","description":"cheat sheet app made with content up to week 6 in thinkful"}'
+should get a list of urls
+2. search for "ssh_url" and copy it
+    -Example: "ssh_url": "git@github.com:Lavioli/panda-helper.git"
+3. git remote add origin git@github.com:Lavioli/panda-helper.git
 

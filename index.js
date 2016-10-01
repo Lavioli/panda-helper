@@ -9,7 +9,7 @@ var Steps = function (props) {
 	return <li className="Step">{props.text}</li>;
 };
 
-var Sheet = function (props) {
+var CheatSheet = function (props) {
 	return (
 		<div className="Sheet">
 			<div className="title">{props.title}</div>
@@ -17,6 +17,16 @@ var Sheet = function (props) {
 		</div>
 	);
 };
+ 
+var SheetContainer = React.createClass({
+	//intial state should have steps and title of the cheatsheet
+	getInitialState: function() {
+		return {
+			title: 
+
+		};
+	},
+});
 
 var CheatSheet = function(props) {
 	var step = <Steps />;

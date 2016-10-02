@@ -1,5 +1,4 @@
 ``Installing npm & package control in sublime text``
-
 1. Install node and npm (http://nodejs.org/)
 2. Install Package Control (https://sublime.wbond.net/installation)
 3. Cmd + Shift + P 
@@ -45,11 +44,12 @@
 
 ``Install webpack dev server``
     `updates server http://localhost:8080/ automatically without refreshing browser`
-1. npm install webpack.dev.server -D 
+1. npm install webpack-dev-server --save-dev
     `-D is basically AKA --save-dev`
 2. package.json create a custom script:
     `"start": "webpack-dev-server --inline --hot"`
     -inline adds the javascript code inside the --html page, and --hot reloads it
+3. npm start (to run the server)
 
 ``Install react, babel, and webpack``
 1. npm install --save-dev mocha chai react-addons-test-utils babel-register
@@ -136,7 +136,10 @@ curl X PUT -H "Content-Type": application/json -d '{"name": "durian", "id": 3}' 
 `DELETE`
 curl -X DELETE http://localhost:8080/items/3
 
-``HEROKU``
+``insert file to .gitignore``
+1. echo "node_modules/" >> .gitignore
+
+#HEROKU
 `Login`
 $heroku login
 Enter your Heroku credentials.
@@ -158,7 +161,9 @@ Scaling web processes... done, now running 1
 `open`
 $ heroku open
 
-``Create new repo from bash using github api``
+
+#GitHub
+``Create new repo from bash using github api SSH method``
 1. curl -u 'INSERT GITHUB USERNAME HERE' https://api.github.com/user/repos -d '{"name":"INSERT REPO NAME HERE","description":"INSERT OPTIONAL DESCRIPTION HERE"}'
     -Example
     curl -u 'Lavioli' https://api.github.com/user/repos -d '{"name":"panda-helper","description":"cheat sheet app made with content up to week 6 in thinkful"}'
@@ -166,4 +171,37 @@ should get a list of urls
 2. search for "ssh_url" and copy it
     -Example: "ssh_url": "git@github.com:Lavioli/panda-helper.git"
 3. git remote add origin git@github.com:Lavioli/panda-helper.git
+4. git push -u origin master
+
+``Create new repo from bash using github api HTTP clone method``
+1. curl -u 'INSERT GITHUB USERNAME HERE' https://api.github.com/user/repos -d '{"name":"INSERT REPO NAME HERE","description":"INSERT OPTIONAL DESCRIPTION HERE"}'
+    -Example
+    curl -u 'Lavioli' https://api.github.com/user/repos -d '{"name":"panda-helper","description":"cheat sheet app made with content up to week 6 in thinkful"}'
+    -Expect
+    should get a list of urls
+2. search for "clone_url" and copy it
+3.  -Example: "clone_url": "https://github.com/Lavioli/panda-helper.git"
+4. git init
+5. git clone https://github.com/Lavioli/panda-helper.git
+
+
+``Github: Fix SSH error ``
+Error: `Permission denied (publickey). fatal: Could not read from remote repository.Please make sure you have the correct access rights
+and the repository exists.`
+1. ssh-keygen -t rsa -C "youremail@gmail.com"
+2. Press Enter
+3. Press Enter Again
+4. cat ~/.ssh/id_rsa.pub
+5. Copy the SSH key, should look something like:
+    ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDXuqIO/6+w/ssQ2KCw8djw5fslkdfjaslkfjlksafj/elwmc0aqYuCm6kbxtwHL5mmulFCLj6gmQ40i5JoodOKglr7K93YxsdfasfDfFcRVz+yBOerJYux2NHhoygnfUCzOhYtHcysqpxbaBJR4etVQm/BdFABSxEKt youremail@gmail.com
+6. go to https://github.com/settings/ssh
+7. Click New SSH Key and paste in the SSH Key
+
+``Github remove git file``
+1. rm -rf .git
+
+``move content from one folder to another``
+1. mv folder1/* folder2
+    -Example: `mv react-review/* ../react-counter`
+
 

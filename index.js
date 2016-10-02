@@ -9,33 +9,72 @@ var Steps = function (props) {
 	return <li className="Step">{props.text}</li>;
 };
 
-var CheatSheet = function (props) {
-	return (
-		<div className="Sheet">
-			<div className="title">{props.title}</div>
-				<ol className="sheet-list">{props.step}</ol>
+var CheatSheet = React.createClass({
+	render: function() {
+		<div className="sheet">
+			<div className="steps">
+				<Steps text="step1"/>
+			</div>
+			<form>
+				<input type="text" onChange={this.props.onAddInputChanged} />
+				<input type="submit" onClick={this.props.onAddSubmit} />
+			</form>
 		</div>
-	);
-};
+	}
+ });
+
+// var CheatSheet = function (props) {
+// 	return (
+// 		<div className="Sheet">
+// 			<div className="title">{props.title}</div>
+// 				<ol className="sheet-list">{props.step}</ol>
+// 		</div>
+// 	);
+// };
  
 var SheetContainer = React.createClass({
 	//intial state should have steps and title of the cheatsheet
 	getInitialState: function() {
 		return {
-			title: 
-
+			title: "",
+			step: this.props.steps
 		};
 	},
+	render: function() {
+		return (
+			<CheatSheet 
+				onAddInputChanged = {this.onAddInputChanged}
+				steps={this.props.text}
+			/>
+		);
+	},
+	onAddInputChanged: function(event) {
+		this.setState({step: event.target.value})
+	},
+
+	onAddSubmit: function(event) {
+		event.preventDefault();
+		this.state.steps.push(this.state.text);
+		this.setState({steps: this.state.steps});
+	}
+
 });
 
-var CheatSheet = function(props) {
-	var step = <Steps />;
-	return (
-		<div className="CheatSheet">
-			<Sheet title="CheatSheet1" step={step} />
-		</div>
-	);	
-};
+// var CheatSheet = function(props) {
+// 	var step = <Steps />;
+// 	return (
+// 		<div className="CheatSheet">
+// 			<Sheet title="CheatSheet1" step={step} />
+// 		</div>
+// 	);	
+// };
+
+var items = [
+	{
+		title: "abc title",
+		step: "step 1"
+	}
+];
 
 
 var Board = React.createClass({

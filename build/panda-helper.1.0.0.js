@@ -49,17 +49,58 @@
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(34);
 	
-	var Card = function Card() {
-		return React.createElement(
-			'div',
-			null,
-			'hello'
-		);
-	};
+	var Master = React.createClass({
+	  displayName: 'Master',
 	
-	document.addEventListener('DOMContentLoaded', function () {
-		ReactDOM.render(React.createElement(COMPONENTHERE, null), document.getElementById('app'));
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(CounterLogicWrapper, null)
+	    );
+	  }
 	});
+	
+	var CounterLogicWrapper = React.createClass({
+	  displayName: 'CounterLogicWrapper',
+	
+	  getInitialState: function getInitialState() {
+	    return {
+	      counter: 0
+	    };
+	  },
+	  increment: function increment() {
+	    this.setState({
+	      counter: this.state.counter + 1
+	    });
+	  },
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(Counter, { counter: this.state.counter }),
+	      React.createElement(
+	        'button',
+	        { onClick: this.increment },
+	        'increment'
+	      )
+	    );
+	  }
+	});
+	
+	var Counter = React.createClass({
+	  displayName: 'Counter',
+	
+	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      null,
+	      this.props.counter
+	    );
+	  }
+	});
+	
+	ReactDOM.render(React.createElement(Master, null), document.getElementById('app'));
 
 /***/ },
 /* 1 */

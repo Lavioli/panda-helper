@@ -17,6 +17,20 @@
     -npm install <pkg name> --save-optional
         -install and save package as an optional dependency (overrides dependencies if any of they fail, such as rejecting a certain version of a package)
 
+``Install istanbul``
+1. npm install istanbul --save
+2. istanbul cover 
+3. package.json:
+```
+    "scripts": {
+        "start": "node index.js",
+        "test": "mocha",
+        "coverage": "istanbul cover _mocha test --recursive"
+      },
+```
+4. npm run coverage
+
+
 ``Install mongoDB``
 1. sudo apt-get install -y mongodb-org
 2. mkdir mongo_data (inside workspace dir)
@@ -26,8 +40,23 @@
 5. npm init
 6. npm install --save mongodb
 
+``Run mongo database from workspace:``
+1. ./run_mongod 
+
+``Run mongo shell:``
+1. cd into mongo_data
+2. $ mongo
+3. Commands
+    show dbs
+    use nameofdatabase
+    show collections
+
 ``Install Mongoose``
-1. npm install express mongoose body-parser --save
+1. npm install mongoose --save
+2. require:
+    var Count = require('../models/guessCount');
+    var mongoose = require('mongoose');
+
 
 ``Install Mocha(globally) & Chai``
 1. npm install mocha -g chai chai-http --save-dev
@@ -41,6 +70,50 @@
 1. npm install --save express
 2. echo $C9_HOSTNAME
     -checks for hostname link
+3. Require in your server.js:
+    var express = require('express');
+    var app = express();
+
+``Install nodemon``
+runs node server automatically each time you save a file
+1. npm install nodemon -g
+run: $ nodemon
+
+
+``Install concurrently`` 
+allows concurrently run multiple proccesses in your build
+1. npm install concurrently -g
+
+#writing script to clean and make build, run server
+    ``"clean": "rm -rf build"``
+cleans/deletes build folder recursively and forcibly"``
+    ``"clean": "rm -rf build"``
+make a directory if it doesn't exist(-p), and copy the index.html into build folder
+    "build:html": "mkdir -p build && cp index.html build",
+    "build:css": "mkdir -p build && cp css/style.css build"
+npm start will run clean, and then run build html, and css, and then run server
+    ``"start": "npm run clean && npm run build:html && npm run build:css && npm run server"``
+
+npm run server will concurrently run with the previous npm clean and build commands and then will run webpack server in watch mode (which has to use double quotes) along with nodemon server
+    ``"server": "concurrently \"webpack -w\" \"nodemon server/server.js\""``
+
+
+```
+ "scripts": {
+    "start": "npm run clean && npm run build:html && npm run build:css && npm run server",
+    "server": "concurrently \"webpack -w\" \"nodemon server/server.js\"",
+    "test": "mocha --compilers js:babel-register test/**/*.js*",
+    "coverage": "istanbul cover _mocha test --recursive",
+    "clean": "rm -rf build",
+    "build:html": "mkdir -p build && cp index.html build",
+    "build:css": "mkdir -p build && cp css/style.css build"
+  },
+```
+
+``Install bodyparser for middleware``
+1. npm install body-parser --save
+2. require:
+    var bodyParser = require('body-parser');
 
 ``Install webpack dev server``
     `updates server http://localhost:8080/ automatically without refreshing browser`
@@ -100,6 +173,44 @@ var path = require('path');
       }
 ```
 
+``Basic install for react``
+npm install --save react react-dom
+npm install --save-dev babel-preset-react
+npm install --save-dev webpack
+npm install --save-dev babel-core babel-preset-es2015 babel-loader
+
+webpack.config.js:
+```
+var path = require('path');
+
+var webpack = require('webpack');
+
+var packageData = require('./package.json');
+
+var filename = [packageData.name, packageData.version, 'js'];
+
+module.exports = {
+    entry: path.resolve(__dirname, packageData.main),
+    output: {
+        path: path.resolve(__dirname, 'build'),
+        filename: filename.join('.'),
+    },
+    devtool: 'source-map',
+    module: {
+        loaders: [
+            {
+                test: /\.js$/,
+                exclude: /(node_modules)/,
+                loader: 'babel',
+                query: {
+                    presets: ['es2015', 'react']
+                }
+            }
+        ]
+    }
+};
+```
+
 ``Install Redux``
 1. npm install --save redux
 
@@ -110,6 +221,10 @@ var path = require('path');
 var store = createStore(reducers.repositoryReducer, applyMiddleware(thunk));
 module.exports  = store;
 ```
+
+``Install Immunitability Helpers for React"
+1. npm install --save react-addons-update
+
 
 ``Install polyfill for HTTP fetch API``
 1. npm install --save isomorphic-fetch
@@ -203,5 +318,4 @@ and the repository exists.`
 ``move content from one folder to another``
 1. mv folder1/* folder2
     -Example: `mv react-review/* ../react-counter`
-
 

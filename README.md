@@ -36,12 +36,12 @@ sudo chown your_username directory
 4. npm run coverage
 
 
-``Install mongoDB``
+``Install mongoDB on CLOUD9``
 1. sudo apt-get install -y mongodb-org
 2. mkdir mongo_data (inside workspace dir)
 3. echo 'mongod --bind_ip=$IP --dbpath=/home/ubuntu/workspace/mongo_data --nojournal --rest "$@"' > run_mongod
 4. chmod a+x run_mongod
-    -./run_mongod from the console to run the database
+    (./run_mongod from the console to run the database)
 5. npm init
 6. npm install --save mongodb
 
@@ -55,6 +55,23 @@ sudo chown your_username directory
     show dbs
     use nameofdatabase
     show collections
+
+``Install mongoDB on macOSX with homebrew``
+1. brew update
+2. brew install mongodb
+3. mkdir -p /data/db
+4. sudo chown -R `id -un` /data/db
+5. enter password
+6. mongod
+``Run mongo shell:``
+1. cd into mongo_data
+2. $ mongo
+3. Commands
+    show dbs
+    use nameofdatabase
+    show collections
+    quit()
+
 
 ``Install Mongoose``
 1. npm install mongoose --save

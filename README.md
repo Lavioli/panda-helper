@@ -4,6 +4,11 @@
 3. Cmd + Shift + P 
 4. Type "Install Package" and select "Package Control: Install Package"
 
+
+``Install npm packages as an administrator``
+sudo chown your_username directory
+
+
 ``Install npm packages``
 1. Cmd + Shift + P
 2. Type "npm install" and select
@@ -178,6 +183,8 @@ npm install --save react react-dom
 npm install --save-dev babel-preset-react
 npm install --save-dev webpack
 npm install --save-dev babel-core babel-preset-es2015 babel-loader
+npm install http-server --save -g
+npm install
 
 webpack.config.js:
 ```
@@ -318,4 +325,121 @@ and the repository exists.`
 ``move content from one folder to another``
 1. mv folder1/* folder2
     -Example: `mv react-review/* ../react-counter`
+
+
+``remove branch locally and remotely``
+1. git branch -rd origin/nameofbranch
+
+``remove branch locally``
+1. git branch -D nameofbranch
+
+``git log``
+1. git log
+
+
+
+
+
+#Step by step after installation for react-router email app
+
+``webpack, react, http-server with react-route``
+1. touch index.js index.html
+2. npm init
+3. npm install --save react react-dom
+4. npm install --save-dev babel-preset-react
+5. npm install --save-dev webpack
+6. npm install --save-dev babel-core babel-preset-es2015 babel-loader
+7. npm install http-server --save -g
+8. npm install --save react-router
+10. npm install concurrently -g 
+    `allows us to run --watch with webpack at the same time`
+11. package.json
+
+```
+"scripts": {
+        "start": "npm run clean && npm run build:html && npm run server",
+        "server": "concurrently "webpack -w\"",
+        "clean": "rm -rf build",
+        "build:html": "mkdir -p build && cp index.html build"
+    }
+```
+
+10.to run: $npm start
+
+11. inside- index.html 
+
+```
+
+<!DOCTYPE html>
+<html>
+    <head>
+       <script type="text/javascript" src="https://code.jquery.com/jquery.min.js"></script>
+    </head>
+    <body>
+        <div id='app'></div>
+        <--! you have to src the javascript file without any directory in front because you are build it from the build folder and running it from there -->
+        <script type="text/javascript" src="chat-example.0.0.0.js"></script>
+    </body>
+</html>
+
+```
+
+12. index.js
+```
+var React = require('react');
+var ReactDOM = require('react-dom');
+var router = require('react-router');
+var Router = router.Router;
+var Route = router.Route;
+var hashHistory = router.hashHistory;
+var Link= router.Link;
+var IndexRoute= router.IndexRoute;
+
+```
+
+
+#install full-stack primer
+1.npm run dev (default to 8080)
+
+2.npm run dev
+
+3.edit script: "test": "NODE_ENV=development CLIENT_PATH=build/dev/client mocha --compilers js:babel-core/register --recursive"
+
+4. npm install chai chai-http --save-dev
+
+binding power:
+http://javascript.crockford.com/tdop/tdop.html
+
+npm init
+
+npm install --save-dev mocha chai react-addons-test-utils babel-register
+//If you haven't already done the usual stuff:
+npm install --save react react-dom
+npm install --save-dev babel-preset-react
+npm install --save-dev webpack
+npm install --save-dev babel-core babel-preset-es2015 babel-loader
+
+npm install --save redux
+npm install --save react-redux
+npm install --save redux-thunk
+npm install --save isomorphic-fetch
+
+npm install --save react-router
+
+npm install -g http-server
+
+
+npm install --save express
+npm install --save body-parser
+
+
+DEPLOY TO HEROKU
+$heroku create appnamehere
+$git remote -v
+$heroku config:set NPM_CONFIG_PRODUCTION=false
+    Instruct Heroku to install the development dependencies
+$git push heroku master
+
+
+
 

@@ -39,11 +39,12 @@ sudo chown your_username directory
 ``Install mongoDB on CLOUD9``
 1. sudo apt-get install -y mongodb-org
 2. mkdir mongo_data (inside workspace dir)
-3. echo 'mongod --bind_ip=$IP --dbpath=/home/ubuntu/workspace/mongo_data --nojournal --rest "$@"' > run_mongod
-4. chmod a+x run_mongod
+3. mkdir ~/data (outside of workspace dir)
+4. echo 'mongod --bind_ip=$IP --dbpath=/home/ubuntu/workspace/mongo_data --nojournal --rest "$@"' > run_mongod
+5. chmod a+x run_mongod
     (./run_mongod from the console to run the database)
-5. npm init
-6. npm install --save mongodb
+6. npm init
+7. npm install --save mongodb
 
 ``Run mongo database from workspace:``
 1. ./run_mongod 
@@ -70,7 +71,14 @@ sudo chown your_username directory
     show dbs
     use nameofdatabase
     show collections
+    db.products.find().pretty()
+    db.products.insert({"name": "insert info here"})
+    db.products.remove({})  removes all items in collection
     quit()
+
+``already installed homebrew MongoDB and create dbpath only``
+in the workspace folder:
+mongod --dbpath data/db
 
 
 ``Install Mongoose``
@@ -456,6 +464,14 @@ $git remote -v
 $heroku config:set NPM_CONFIG_PRODUCTION=false
     Instruct Heroku to install the development dependencies
 $git push heroku master
+
+
+``start server by http-server for frontend``
+1. npm init
+2. sudo npm install http-server -g
+3. http-server
+Server will be available in the given links
+
 
 
 

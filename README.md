@@ -287,6 +287,8 @@ curl -X DELETE http://localhost:8080/items/3
 1. echo "node_modules/" >> .gitignore
 
 #HEROKU
+install heroku cli if you don't have it
+
 `Login`
 $heroku login
 Enter your Heroku credentials.
@@ -307,6 +309,25 @@ $ heroku ps:scale web=1
 Scaling web processes... done, now running 1
 `open`
 $ heroku open
+
+#mLab
+create new database using sandbox
+click on the database to edit and you should see:
+```
+To connect using the mongo shell:
+ 
+mongo ds159517.mlab.com:59517/whatsup -u <dbuser> -p <dbpassword>
+To connect using a driver via the standard MongoDB URI (what's this?):
+
+mongodb://<dbuser>:<dbpassword>@ds159517.mlab.com:59517/whatsup
+
+```
+
+
+`connect mLab database with heroku`
+$heroku config
+$heroku config:set DATABASE_URI=mongodb://<dbusername>:<dbpassword>@ds159517.mlab.com:59517/whatsup
+$heroku restart
 
 
 #GitHub

@@ -306,7 +306,7 @@ Email: frodo@example.com
 Password:
 $heroku git:remote -a NameOfHerokuAppHere
 
-#for new heroku apps (assuming you are already a collaborator)
+#for new heroku apps (creating app for the first time)
 `heroku create`
 $ heroku create typenamehere
 Creating typenamehere... done, stack is cedar

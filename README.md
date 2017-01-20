@@ -112,7 +112,7 @@ run: $ nodemon
 
 ``Install concurrently`` 
 allows concurrently run multiple proccesses in your build
-1. npm install concurrently -g
+1. 
 
 #writing script to clean and make build, run server
     ``"clean": "rm -rf build"``
@@ -298,17 +298,29 @@ Could not find an existing public key.
 Would you like to generate one? [Yn]
 Generating new SSH public key.
 Uploading ssh public key /Users/frodo/.ssh/id_rsa.pub
+
+#for existing heroku apps (assuming you are already a collaborator)
+$heroku login
+Enter your Heroku credentials.
+Email: frodo@example.com
+Password:
+$heroku git:remote -a NameOfHerokuAppHere
+
+#for new heroku apps (assuming you are already a collaborator)
 `heroku create`
-$ heroku create
-Creating stark-fog-398... done, stack is cedar
+$ heroku create typenamehere
+Creating typenamehere... done, stack is cedar
 http://stark-fog-398.herokuapp.com/ | git@heroku.com:stark-fog-398.git
 Git remote heroku added
+
 $ git push heroku master
 `checks if dyno is running to serve the app`
 $ heroku ps:scale web=1
 Scaling web processes... done, now running 1
 `open`
 $ heroku open
+
+
 
 #mLab
 create new database using sandbox
@@ -487,6 +499,8 @@ $heroku config:set NPM_CONFIG_PRODUCTION=false
 $git push heroku master
 
 
+
+
 ``start server by http-server for frontend``
 1. npm init
 2. sudo npm install http-server -g
@@ -494,6 +508,11 @@ $git push heroku master
 Server will be available in the given links
 
 
+
+PROCESS.ENV
+1. npm i dotenv -D
+2. touch .env
+3. open .env
 
 
 
